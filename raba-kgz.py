@@ -12,18 +12,18 @@ See https://wiki.openstreetmap.org/wiki/Slovenia_Landcover_Import_-_RABA-KGZ
 The following fields are dropped from the source shapefile:
 
 Field           Definition          Reason
-AREA			Area size			Redundant, can be derived (calculated) from data
-STATUS			???					No documentation
+AREA            Area size           Redundant, can be derived (calculated) from data
+STATUS          ???                 No documentation
 
 
 The following fields are used:    
 
 Field           Used for            Reason
-RABA_ID			landuse=* / natural=*
-				raba:id				Serves as backup for easy mass change of mappings if needed, as some precision is lost in translation to OSM tags
-RABA_PID		raba:pid			Unique ID for the area in the source
-D_OD			raba:date			Date of last change in the source
-VIR				raba:source			Source of data within the source
+RABA_ID         landuse=*;natural=* Main tags
+                raba:id             Serves as backup for easy mass change of mappings if needed, as some precision is lost in translation to OSM tags
+RABA_PID        raba:pid            Unique ID for the area in the source
+D_OD            raba:date           Date of last change in the source
+VIR             raba:source         Source of data within the source
 
 Polygon with RABA_ID=3000 (built-up areas) are skipped
 
@@ -50,17 +50,17 @@ def filterTags(attrs):
         return
     tags = {}
 
-	# tag source
+    # tag source
     tags['source'] = 'RABA-KGZ'
     tags['source:date'] = '2014-09-11'
 
-	# map RABA_ID to OSM tags
+    # map RABA_ID to OSM tags
     if 'RABA_ID' in attrs:
-	
+
         rabaid = attrs['RABA_ID'].strip()
         tags['raba:id'] = rabaid
 
-		# NJIVE IN VRTOVI
+        # NJIVE IN VRTOVI
         if rabaid == '1100': # Njiva (1000 m2)
             tags['landuse'] = 'farmland'
         elif rabaid == '1160': # Hmeljišče (500 m2)
@@ -71,7 +71,7 @@ def filterTags(attrs):
         elif rabaid == '1190': # Rastlinjak (25 m2)
             tags['landuse'] = 'greenhouse_horticulture'
 
-		# TRAJNI NASADI
+        # TRAJNI NASADI
         elif rabaid == '1211': # Vinograd (500 m2)
             tags['landuse'] = 'vineyard'
         elif rabaid == '1212': # Matičnjak (500 m2)
@@ -86,7 +86,7 @@ def filterTags(attrs):
         elif rabaid == '1240': # Ostali trajni nasadi (500 m2)
             tags['landuse'] = 'plantation'
 
-		# TRAVNIŠKE POVRŠINE
+        # TRAVNIŠKE POVRŠINE
         elif rabaid == '1300': # Trajni travnik (1000 m2)
             tags['landuse'] = 'meadow'
         elif rabaid == '1321': # Barjanski travnik (1000 m2)
@@ -95,7 +95,7 @@ def filterTags(attrs):
         elif rabaid == '1800': # Kmetijsko zemljišče, poraslo z gozdnim drevjem (1000 m2)
             tags['landuse'] = 'forest'
 
-		# DRUGE KMETIJSKE POVRŠINE
+        # DRUGE KMETIJSKE POVRŠINE
         elif rabaid == '1410': # Kmetijsko zemljišče v zaraščanju (1000 m2)
             tags['natural'] = 'heath'
         elif rabaid == '1420': # Plantaža gozdnega drevja (1000 m2)
@@ -105,11 +105,11 @@ def filterTags(attrs):
         elif rabaid == '1600': # Neobdelano kmetijsko zemljišče (1000 m2)
             tags['natural'] = 'scrub'
 
-		# GOZD
+        # GOZD
         elif rabaid == '2000': # Gozd (2500m2)
             tags['landuse'] = 'forest'
 
-		# OSTALA NEKMETIJSKA ZEMLJIŠČA
+        # OSTALA NEKMETIJSKA ZEMLJIŠČA
         elif rabaid == '3000': # Pozidano in sorodno zemljišče (25 m2)
             tags['landuse'] = 'construction'
             tags['fixme'] = 'should not be imported'
