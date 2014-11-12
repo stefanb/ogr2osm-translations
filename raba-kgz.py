@@ -70,6 +70,7 @@ def filterTags(attrs):
             tags['landuse'] = 'plant_nursery'
         elif rabaid == '1190': # Rastlinjak (25 m2)
             tags['landuse'] = 'greenhouse_horticulture'
+            tags['building'] = 'greenhouse'
 
         # TRAJNI NASADI
         elif rabaid == '1211': # Vinograd (500 m2)
