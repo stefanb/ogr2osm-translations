@@ -67,7 +67,7 @@ def filterTags(attrs):
             tags['landuse'] = 'farmland'
             tags['crop'] = 'hop'
         elif rabaid == '1180': # Trajne rastline na njivskih površinah (1000 m2)
-            tags['landuse'] = 'farmland'
+            tags['landuse'] = 'plant_nursery'
         elif rabaid == '1190': # Rastlinjak (25 m2)
             tags['landuse'] = 'greenhouse_horticulture'
 
@@ -75,7 +75,8 @@ def filterTags(attrs):
         elif rabaid == '1211': # Vinograd (500 m2)
             tags['landuse'] = 'vineyard'
         elif rabaid == '1212': # Matičnjak (500 m2)
-            tags['landuse'] = 'vineyard'
+            tags['landuse'] = 'plant_nursery'
+            tags['plant'] = 'vine'
         elif rabaid == '1221': # Intenzivni sadovnjak (1000 m2)
             tags['landuse'] = 'orchard'
         elif rabaid == '1222': # Ekstenzivni oziroma travniški sadovnjak (1000 m2)
