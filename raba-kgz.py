@@ -131,6 +131,8 @@ def filterTags(attrs):
 
         else:
             tags['fixme'] = 'unknown raba_id: ' + rabaid
+            #fail on unexpected raba_id:
+            raise ValueError("Unexpected raba_id: %r" % (rabaid))
             
 
     if 'RABA_PID' in attrs:
