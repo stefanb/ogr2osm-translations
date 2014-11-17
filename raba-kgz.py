@@ -38,7 +38,7 @@ def filterFeature(ogrfeature, fieldNames, reproject):
         return
 
     index = ogrfeature.GetFieldIndex('RABA_ID')
-    if index>0 and ogrfeature.GetField(index) == 3000:
+    if index>=0 and ogrfeature.GetField(index) == 3000:
         #print 'skipping' 
         #print ogrfeature.GetField(index)
         return None
